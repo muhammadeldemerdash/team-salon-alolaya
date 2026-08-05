@@ -19,6 +19,7 @@
 
 *,*::before,*::after{ box-sizing:border-box; }
 html{ scroll-behavior:smooth; }
+html,body{ overflow-x:clip; }
 
 body{
   margin:0;
@@ -44,11 +45,11 @@ h3{ font-size:1.25rem; }
 p{ margin:0 0 1em; color:var(--text); }
 a{ color:inherit; text-decoration:none; }
 img{ max-width:100%; display:block; }
+img, svg, video{ max-width:100%; height:auto; }
 
 .container{
-  max-width:var(--maxw);
+  width:min(1200px,100% - 32px);
   margin-inline:auto;
-  padding-inline:24px;
 }
 
 .muted{ color:var(--text-muted); }
@@ -492,7 +493,7 @@ a:focus-visible, button:focus-visible{
 .offers-posters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;align-items:start;max-width:1600px;margin-inline:auto}
 .offer-poster{margin:0;overflow:hidden;border:1px solid var(--line);background:var(--bg-panel-2);box-shadow:var(--shadow);max-width:750px;margin-inline:auto}
 .offer-poster img{width:100%;height:auto;display:block;transition:transform .45s cubic-bezier(.2,.8,.2,1);object-fit:cover}
-.offer-poster:hover img{transform:scale(1.5)}
+.offer-poster:hover img{transform:scale(1.08)}
 @media(max-width:720px){
   .offers-posters{grid-template-columns:1fr;gap:20px}
   .ticket{align-items:flex-start;padding:26px 22px;gap:16px}
@@ -510,7 +511,7 @@ a:focus-visible, button:focus-visible{
 .btn-primary:hover{box-shadow:0 16px 38px rgba(216,194,164,.36)}
 .btn-outline{background:rgba(252,247,240,.04)}.btn-outline:hover{background:rgba(216,194,164,.1)}
 .service-card,.article-card,.ticket,.offer-poster{border-radius:var(--radius)}
-.offers-posters-section{background:linear-gradient(180deg,var(--bg),var(--bg-panel-2))}.offers-posters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;align-items:start;max-width:1600px;margin-inline:auto}.offer-poster{margin:0;overflow:visible;border:1px solid var(--line);background:var(--bg-panel-2);box-shadow:var(--shadow);max-width:750px;margin-inline:auto}.offer-poster img{width:100%;height:auto;display:block;transition:transform .45s cubic-bezier(.2,.8,.2,1);object-fit:cover}.offer-poster:hover img{transform:scale(1.5)}
+.offers-posters-section{background:linear-gradient(180deg,var(--bg),var(--bg-panel-2))}.offers-posters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;align-items:start;max-width:1600px;margin-inline:auto}.offer-poster{margin:0;overflow:visible;border:1px solid var(--line);background:var(--bg-panel-2);box-shadow:var(--shadow);max-width:750px;margin-inline:auto}.offer-poster img{width:100%;height:auto;display:block;transition:transform .45s cubic-bezier(.2,.8,.2,1);object-fit:cover}.offer-poster:hover img{transform:scale(1.08)}
 @media(max-width:720px){.offers-posters{grid-template-columns:1fr;gap:20px}.ticket{align-items:flex-start;padding:26px 22px;gap:16px}.ticket .price{font-size:2.15rem}}
 @media(prefers-reduced-motion:reduce){.offer-poster img,.service-card,.article-card,.ticket{transition:none}}
 
@@ -618,19 +619,19 @@ a:focus-visible, button:focus-visible{
   height:clamp(480px,40vw,544px); /* 20% shorter */
   padding:56px 0 120px; /* bottom padding clears the overlapping benefits panel */
 }
-.hero-shell{ width:100%; }
+.hero-shell{ width:100%; padding-inline:clamp(16px,4vw,48px); }
 
 .hero-content{
-  width:min(680px,58%);
-  margin-left:auto; /* RTL: pushes content to the physical right half */
+  width:min(680px,100%);
+  margin-inline:auto;
   text-align:center;
   padding-bottom:clamp(24px,4vw,64px); /* add bottom spacing so content is more spread */
   text-shadow:0 3px 24px rgba(0,0,0,.62);
 }
 
-@media (min-width: 900px){
+@media (min-width: 1300px){
   .hero-content{
-    transform:translateX(40%); /* desktop-only shift */
+    transform:translateX(40%); /* desktop-only shift; below 1300px it would push content past the viewport edge */
     will-change:transform;
   }
 }
@@ -689,11 +690,10 @@ a:focus-visible, button:focus-visible{
   position:absolute;
   z-index:3;
   bottom:0;
-  left:50%;
-  right:auto;
-  margin:0;
-  transform:translate(-50%,-170px); /* raised high; caps below keep it clear of the CTA buttons */
-  width:min(1080px,calc(100% - 48px));
+  inset-inline:0;
+  margin-inline:auto;
+  transform:translateY(-170px); /* raised high; caps below keep it clear of the CTA buttons */
+  width:min(1080px,calc(100% - 32px));
   max-width:1080px;
   display:grid;
   grid-template-columns:repeat(4,1fr);
@@ -731,10 +731,10 @@ a:focus-visible, button:focus-visible{
 /* Raise caps: the panel can only float high where the hero is tall enough.
    Below 1700px it stays overlapping the hero's bottom edge so it never
    covers the heading / CTA buttons / address chip. */
-@media(max-width:1699px){ .hero-benefits{ transform:translate(-50%,25%); } }
-@media(min-width:1700px) and (max-width:1899px){ .hero-benefits{ transform:translate(-50%,0); } }
+@media(max-width:1699px){ .hero-benefits{ transform:translateY(25%); } }
+@media(min-width:1700px) and (max-width:1899px){ .hero-benefits{ transform:translateY(0); } }
 @media(min-width:1900px){
-  .hero-benefits{ transform:translate(-50%,-80px); }
+  .hero-benefits{ transform:translateY(-80px); }
 }
 
 /* Small desktops / tablets: slightly more compact content */
