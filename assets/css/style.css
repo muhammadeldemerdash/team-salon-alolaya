@@ -616,8 +616,8 @@ a:focus-visible, button:focus-visible{
   background-size:cover;
   background-position:center center;
   background-repeat:no-repeat;
-  height:clamp(480px,40vw,544px); /* 20% shorter */
-  padding:56px 0 120px; /* bottom padding clears the overlapping benefits panel */
+  min-height:clamp(480px,40vw,544px); /* 20% shorter; floor only — hero grows to fit content so the top padding always clears the header */
+  padding:clamp(72px,10vh,120px) 0 120px; /* top padding clears the sticky header; bottom padding clears the overlapping benefits panel */
 }
 .hero-shell{ width:100%; padding-inline:clamp(16px,4vw,48px); }
 
@@ -640,11 +640,11 @@ a:focus-visible, button:focus-visible{
   font-size:.83rem;
   letter-spacing:1.3px;
   color:#D8C2A4;
-  margin-bottom:7px;
+  margin:0 0 10px;
 }
 .hero-ornament,.hero-title-mark{
   display:flex; align-items:center; justify-content:center; gap:10px;
-  color:#D8B84D; margin:2px auto 10px;
+  color:#D8B84D; margin:0 auto 14px;
 }
 .hero-ornament span{ width:86px; height:1px; background:linear-gradient(90deg,transparent,#D8B84D); }
 .hero-ornament span:last-child{ background:linear-gradient(90deg,#D8B84D,transparent); }
@@ -722,8 +722,7 @@ a:focus-visible, button:focus-visible{
 /* Wide screens: match the image's natural 2:1 ratio, no cropping */
 @media(min-width:1500px){
   .hero{
-    height:auto;
-    aspect-ratio:2.5/1; /* 20% shorter too */
+    min-height:max(clamp(480px,40vw,544px), calc(100vw / 2.5)); /* 20% shorter too; floor only — hero grows to fit content */
     background-position:center center;
   }
 }
