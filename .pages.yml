@@ -80,3 +80,22 @@ content:
       - { name: seoDescription, label: Meta Description, type: text, required: true }
       - { name: published, label: منشور, type: boolean, default: true }
       - { name: body, label: محتوى المقال, type: rich-text, required: true }
+
+  - name: service-pages
+    label: صفحات الخدمات
+    type: collection
+    path: content/service-pages
+    format: yaml-frontmatter
+    filename: "{fields.slug}.md"
+    view:
+      fields: [title, slug]
+      primary: title
+      default:
+        sort: title
+        order: asc
+    fields:
+      - { name: title, label: اسم الخدمة, type: string, required: true }
+      - { name: slug, label: رابط الخدمة بالإنجليزية, type: string, required: true, pattern: "^[a-z0-9-]+$" }
+      - { name: seoTitle, label: SEO Title, type: string, required: true }
+      - { name: seoDescription, label: Meta Description, type: text, required: true }
+      - { name: body, label: محتوى الصفحة, type: rich-text, required: true }

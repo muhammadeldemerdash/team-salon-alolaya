@@ -1157,3 +1157,12 @@ a:focus-visible, button:focus-visible{
     will-change:auto;
   }
 }
+
+/* Long CMS text must never break the service card grid */
+.service-card--premium p,
+.service-card p{
+  display:-webkit-box;
+  -webkit-line-clamp:4;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}

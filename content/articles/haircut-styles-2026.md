@@ -5,7 +5,7 @@ excerpt: مقارنة بين القصّات الكلاسيكية والحديث�
 category: قصّات الشعر
 date: 2026-07-26
 author: فريق Team Salon
-seoTitle: أشهر قصّات الشعر الرجالية 2026 | Team Salon العليا
+seoTitle: أشهر قصّات الشعر الرجالية 2026 | Team Salon فرع العليا، الرياض
 seoDescription: تعرّف على أبرز قصّات الشعر الرجالية لعام 2026 وكيف تختار القصّة المناسبة لشكل وجهك مع نصائح Team Salon.
 published: true
 ---
