@@ -1,0 +1,82 @@
+media:
+  input: assets/images/uploads
+  output: /assets/images/uploads
+
+content:
+  - name: site
+    label: إعدادات الفرع
+    type: file
+    path: content/site.json
+    format: json
+    fields:
+      - { name: siteName, label: اسم الموقع, type: string, required: true }
+      - { name: branchName, label: اسم الفرع, type: string, required: true }
+      - { name: domain, label: رابط الدومين, type: string, required: true }
+      - { name: phoneDisplay, label: رقم الهاتف الظاهر, type: string, required: true }
+      - { name: phone, label: رقم الاتصال الدولي, type: string, required: true }
+      - { name: whatsapp, label: رقم واتساب بدون +, type: string, required: true }
+      - { name: addressShort, label: العنوان المختصر, type: string, required: true }
+      - { name: addressFull, label: العنوان الكامل, type: string, required: true }
+      - { name: mapUrl, label: رابط اتجاهات Google Maps, type: string }
+      - { name: mapEmbed, label: رابط تضمين الخريطة, type: string }
+      - { name: openingHours, label: مواعيد العمل, type: string }
+      - { name: seoEmail, label: بريد مسؤول SEO, type: string }
+
+  - name: services
+    label: الخدمات
+    type: file
+    path: content/services.json
+    format: json
+    fields:
+      - name: services
+        label: قائمة الخدمات
+        type: object
+        list: true
+        fields:
+          - { name: title, label: اسم الخدمة, type: string, required: true }
+          - { name: summary, label: الوصف المختصر, type: text, required: true }
+          - { name: description, label: الوصف الكامل, type: text, required: true }
+          - { name: url, label: رابط صفحة الخدمة, type: string, required: true }
+
+  - name: offers
+    label: العروض
+    type: file
+    path: content/offers.json
+    format: json
+    fields:
+      - name: offers
+        label: قائمة العروض
+        type: object
+        list: true
+        fields:
+          - { name: category, label: القسم, type: string, required: true }
+          - { name: title, label: اسم الباقة, type: string, required: true }
+          - { name: price, label: السعر, type: string, required: true }
+          - { name: currency, label: العملة, type: string, default: ريال }
+          - { name: description, label: تفاصيل العرض, type: text, required: true }
+          - { name: featured, label: إظهار في الرئيسية, type: boolean, default: false }
+
+  - name: articles
+    label: المقالات
+    type: collection
+    path: content/articles
+    format: yaml-frontmatter
+    filename: "{fields.slug}.md"
+    view:
+      fields: [title, category, date, published]
+      primary: title
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - { name: title, label: عنوان المقال, type: string, required: true }
+      - { name: slug, label: رابط المقال بالإنجليزية, type: string, required: true, pattern: "^[a-z0-9-]+$" }
+      - { name: excerpt, label: الوصف المختصر, type: text, required: true }
+      - { name: category, label: التصنيف, type: string, required: true }
+      - { name: date, label: تاريخ النشر, type: date, required: true }
+      - { name: author, label: الكاتب, type: string, default: فريق Team Salon }
+      - { name: seoTitle, label: SEO Title, type: string, required: true }
+      - { name: seoDescription, label: Meta Description, type: text, required: true }
+      - { name: published, label: منشور, type: boolean, default: true }
+      - { name: body, label: محتوى المقال, type: rich-text, required: true }

@@ -1,0 +1,19 @@
+{
+  "name": "team-salon-olaya",
+  "version": "2.2.1",
+  "private": true,
+  "description": "Team Salon Olaya rebuilt with Astro while preserving the approved design and Pages CMS workflow",
+  "scripts": {
+    "prepare:pages": "node scripts/generate-static.cjs && node scripts/html-to-astro.cjs",
+    "predev": "npm run prepare:pages",
+    "dev": "astro dev",
+    "build": "npm run prepare:pages && astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^5.13.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
