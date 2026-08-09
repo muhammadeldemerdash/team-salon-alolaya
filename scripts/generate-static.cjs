@@ -12,6 +12,28 @@ const esc = (value = '') => String(value)
   .replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')
   .replaceAll('"', '&quot;').replaceAll("'", '&#039;');
 
+const gtmHead = `<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5ZS2ZFH4');</script>
+<!-- End Google Tag Manager -->`;
+const gtmBody = `<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5ZS2ZFH4"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->`;
+
+function injectGoogleTagManager(html) {
+  if (html.includes('GTM-5ZS2ZFH4')) return html;
+  if (!/<head(?:\s[^>]*)?>/i.test(html) || !/<body(?:\s[^>]*)?>/i.test(html)) {
+    throw new Error('Page is missing the head or body required for Google Tag Manager');
+  }
+  return html
+    .replace(/<head(?:\s[^>]*)?>/i, `$&\n${gtmHead}`)
+    .replace(/<body(?:\s[^>]*)?>/i, `$&\n${gtmBody}`);
+}
+
 function copyDir(src, dest) {
   if (!fs.existsSync(src)) return;
   fs.mkdirSync(dest, { recursive: true });
@@ -228,13 +250,13 @@ for (const entry of fs.readdirSync(templates, { withFileTypes: true })) {
       html = html.replace(/<main>[\s\S]*?<\/main>/, main);
     }
   }
-  fs.writeFileSync(path.join(dist, entry.name), html);
+  fs.writeFileSync(path.join(dist, entry.name), injectGoogleTagManager(html));
 }
 
 fs.mkdirSync(path.join(dist, 'articles'), { recursive: true });
 let listing = applySite(read(path.join(templates, 'articles', 'index.html')));
 listing = replaceMarked(listing, 'ARTICLES', articleCards());
-fs.writeFileSync(path.join(dist, 'articles', 'index.html'), listing);
+fs.writeFileSync(path.join(dist, 'articles', 'index.html'), injectGoogleTagManager(listing));
 
 const shell = read(path.join(templates, 'articles', 'article.html'));
 for (const article of articles) {
@@ -253,7 +275,7 @@ for (const article of articles) {
   html = html.replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/, `<script type="application/ld+json">\n${JSON.stringify(schema, null, 2)}\n</script>`);
   const main = `<main>\n  <section class="page-hero">\n    <div class="container">\n      <div class="breadcrumb"><a href="/">الرئيسية</a> / <a href="/articles/">المقالات</a> / ${esc(a.title)}</div>\n      <h1>${esc(a.title)}</h1>\n    </div>\n  </section>\n\n  <section class="section">\n    <div class="container article-body">\n      <div class="article-meta"><span>${esc(a.author || 'فريق Team Salon')}</span><span>${esc(a.category)}</span><span>${esc(a.date || '')}</span></div>\n\n      ${markdownToHtml(article.body)}\n\n      <div class="btn-row" style="margin-top:2em;">\n        <a class="btn btn-primary" href="https://wa.me/${esc(site.whatsapp)}" target="_blank" rel="noopener">احجز موعدك عبر واتساب</a>\n      </div>\n    </div>\n  </section>\n</main>`;
   html = html.replace(/<main>[\s\S]*?<\/main>/, main);
-  fs.writeFileSync(path.join(dist, 'articles', `${a.slug}.html`), html);
+  fs.writeFileSync(path.join(dist, 'articles', `${a.slug}.html`), injectGoogleTagManager(html));
 }
 
 const staticPages = ['services.html','offers.html','contact.html','haircut.html','home-haircut.html','hair-system.html','hair-fiber.html','hair-color.html','rasta.html','curly.html','facial.html','massage.html','spa.html','moroccan-bath.html','pedicure.html'];
