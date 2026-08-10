@@ -54,6 +54,7 @@ content:
           - { name: price, label: السعر, type: string, required: true }
           - { name: currency, label: العملة, type: string, default: ريال }
           - { name: description, label: تفاصيل العرض, type: text, required: true }
+          - { name: image, label: صورة الباقة, type: image, required: false }
           - { name: featured, label: إظهار في الرئيسية, type: boolean, default: false }
 
   - name: articles
