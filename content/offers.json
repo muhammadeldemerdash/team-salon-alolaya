@@ -6,7 +6,6 @@
       "price": "75",
       "currency": "ريال",
       "description": "قص شعر + حلاقة لحية بالبخار + غسيل واستشوار + لاصقة أنف",
-      "image": "assets/images/silver.webp",
       "featured": true
     },
     {
@@ -15,7 +14,6 @@
       "price": "110",
       "currency": "ريال",
       "description": "قص شعر + حلاقة لحية + ماسك + الشمع",
-      "image": "assets/images/gold.webp",
       "featured": true
     },
     {
@@ -24,7 +22,6 @@
       "price": "110",
       "currency": "ريال",
       "description": "حلاقة شعر + حلاقة لحية + حمام زيت + تنظيف بشرة",
-      "image": "assets/images/diamond.webp",
       "featured": true
     },
     {
@@ -33,7 +30,6 @@
       "price": "200",
       "currency": "ريال",
       "description": "جلسة مساج 60 دقيقة + حلاقة شعر ولحية",
-      "image": "assets/images/message.png",
       "featured": true
     },
     {
@@ -42,7 +38,6 @@
       "price": "230",
       "currency": "ريال",
       "description": "جلسة مساج 60 دقيقة + باديكير يد وقدم",
-      "image": "assets/images/bodycare.png",
       "featured": false
     },
     {
@@ -51,8 +46,15 @@
       "price": "250",
       "currency": "ريال",
       "description": "جلسة مساج 60 دقيقة + حمام مغربي ملكي",
-      "image": "assets/images/morroco.png",
       "featured": false
+    },
+    {
+      "category": "عروض الباقات",
+      "title": "الباقة الفضية",
+      "price": "99",
+      "currency": "ريال",
+      "description": "حلاقة شعر + لحية + واكس كامل للوجه + سنفرة بالبخار + لاصقة انف + حمام زيت + غسيل ",
+      "featured": true
     }
   ]
 }
