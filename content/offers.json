@@ -54,6 +54,7 @@
       "price": "99",
       "currency": "ريال",
       "description": "حلاقة شعر + لحية + سنفرة بالبخار + لاصقة انف + غسيل",
+      "image": "/assets/images/uploads/ChatGPT Image 10 أغسطس 2026، 07_51_41 م.png",
       "featured": true
     },
     {
@@ -62,6 +63,7 @@
       "price": "149",
       "currency": "ريال",
       "description": "حلاقة شعر + لحية + واكس كامل للوجه + سنفرة بالبخار + لاصقة انف + حمام زيت + غسيل ",
+      "image": "/assets/images/uploads/34c07050-6eb5-4682-86f6-d7820fca9fab-1.png",
       "featured": true
     }
   ]
