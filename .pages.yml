@@ -77,6 +77,7 @@ content:
       - { name: category, label: التصنيف, type: string, required: true }
       - { name: date, label: تاريخ النشر, type: date, required: true }
       - { name: author, label: الكاتب, type: string, default: فريق Team Salon }
+      - { name: image, label: صورة المقال, type: image, required: false }
       - { name: seoTitle, label: SEO Title, type: string, required: true }
       - { name: seoDescription, label: Meta Description, type: text, required: true }
       - { name: published, label: منشور, type: boolean, default: true }

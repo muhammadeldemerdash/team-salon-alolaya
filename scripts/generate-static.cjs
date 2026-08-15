@@ -11,6 +11,13 @@ const json = (p) => JSON.parse(read(p));
 const esc = (value = '') => String(value)
   .replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')
   .replaceAll('"', '&quot;').replaceAll("'", '&#039;');
+const assetUrl = (value) => {
+  if (!value) return '';
+  const image = String(value);
+  return /^https?:\/\//i.test(image) || image.startsWith('/')
+    ? image
+    : `/${image.replace(/^\.?\//, '')}`;
+};
 
 const gtmHead = `<!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -215,7 +222,7 @@ const categories = [...new Set(offers.map(o => o.category))];
 const allOffers = categories.map(category => `<div class="package-category-group">\n        <h3 class="package-category-title"><span class="package-category-line" aria-hidden="true"></span><span class="package-category-label">${esc(category)}</span></h3>\n        <div class="packages-design-grid ${offers.filter(o => o.category === category).length > 3 ? 'packages-design-grid--four' : ''}">\n          ${offers.filter(o => o.category === category).map(o => offerCard(o, offers.indexOf(o))).join('\n          ')}\n        </div>\n      </div>`).join('\n\n      ');
 
 function articleCards() {
-  return `<div class="article-grid">\n${articles.map(a => `        <a class="article-card" href="/articles/${esc(a.data.slug)}/">\n          <span class="tag">${esc(a.data.category)}</span>\n          <h3>${esc(a.data.title)}</h3>\n          <p>${esc(a.data.excerpt)}</p>\n          <span class="read-more">اقرأ المقال ←</span>\n        </a>`).join('\n')}\n      </div>`;
+  return `<div class="article-grid">\n${articles.map(a => `        <a class="article-card" href="/articles/${esc(a.data.slug)}/">\n          ${a.data.image ? `<img class="article-card-image" src="${esc(assetUrl(a.data.image))}" alt="صورة مقال: ${esc(a.data.title)}" loading="lazy">` : ''}\n          <div class="article-card-content">\n            <span class="tag">${esc(a.data.category)}</span>\n            <h3>${esc(a.data.title)}</h3>\n            <p>${esc(a.data.excerpt)}</p>\n            <span class="read-more">اقرأ المقال ←</span>\n          </div>\n        </a>`).join('\n')}\n      </div>`;
 }
 
 fs.rmSync(dist, { recursive: true, force: true });
@@ -272,8 +279,15 @@ for (const article of articles) {
     publisher: { '@type': 'Organization', name: site.siteName },
     mainEntityOfPage: `${site.domain.replace(/\/$/, '')}/articles/${a.slug}/`
   };
+  if (a.image) {
+    const image = assetUrl(a.image);
+    schema.image = /^https?:\/\//i.test(image) ? image : `${site.domain.replace(/\/$/, '')}${image}`;
+  }
   html = html.replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/, `<script type="application/ld+json">\n${JSON.stringify(schema, null, 2)}\n</script>`);
-  const main = `<main>\n  <section class="page-hero">\n    <div class="container">\n      <div class="breadcrumb"><a href="/">الرئيسية</a> / <a href="/articles/">المقالات</a> / ${esc(a.title)}</div>\n      <h1>${esc(a.title)}</h1>\n    </div>\n  </section>\n\n  <section class="section">\n    <div class="container article-body">\n      <div class="article-meta"><span>${esc(a.author || 'فريق Team Salon')}</span><span>${esc(a.category)}</span><span>${esc(a.date || '')}</span></div>\n\n      ${markdownToHtml(article.body)}\n\n      <div class="btn-row" style="margin-top:2em;">\n        <a class="btn btn-primary" href="https://wa.me/${esc(site.whatsapp)}" target="_blank" rel="noopener">احجز موعدك عبر واتساب</a>\n      </div>\n    </div>\n  </section>\n</main>`;
+  const articleImage = a.image
+    ? `<img class="article-featured-image" src="${esc(assetUrl(a.image))}" alt="صورة مقال: ${esc(a.title)}">`
+    : '';
+  const main = `<main>\n  <section class="page-hero">\n    <div class="container">\n      <div class="breadcrumb"><a href="/">الرئيسية</a> / <a href="/articles/">المقالات</a> / ${esc(a.title)}</div>\n      <h1>${esc(a.title)}</h1>\n    </div>\n  </section>\n\n  <section class="section">\n    <div class="container article-body">\n      ${articleImage}\n      <div class="article-meta"><span>${esc(a.author || 'فريق Team Salon')}</span><span>${esc(a.category)}</span><span>${esc(a.date || '')}</span></div>\n\n      ${markdownToHtml(article.body)}\n\n      <div class="btn-row" style="margin-top:2em;">\n        <a class="btn btn-primary" href="https://wa.me/${esc(site.whatsapp)}" target="_blank" rel="noopener">احجز موعدك عبر واتساب</a>\n      </div>\n    </div>\n  </section>\n</main>`;
   html = html.replace(/<main>[\s\S]*?<\/main>/, main);
   fs.writeFileSync(path.join(dist, 'articles', `${a.slug}.html`), injectGoogleTagManager(html));
 }
