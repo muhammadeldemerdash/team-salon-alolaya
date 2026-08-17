@@ -21,6 +21,7 @@ content:
       - { name: mapEmbed, label: رابط تضمين الخريطة, type: string }
       - { name: openingHours, label: مواعيد العمل, type: string }
       - { name: seoEmail, label: بريد مسؤول SEO, type: string }
+      - { name: freshaUrl, label: رابط الحجز على Fresha, type: string }
 
   - name: services
     label: الخدمات
@@ -101,3 +102,20 @@ content:
       - { name: seoTitle, label: SEO Title, type: string, required: true }
       - { name: seoDescription, label: Meta Description, type: text, required: true }
       - { name: body, label: محتوى الصفحة, type: rich-text, required: true }
+
+  - name: team
+    label: فريقنا
+    type: file
+    path: content/team.json
+    format: json
+    fields:
+      - name: team
+        label: أعضاء الفريق
+        type: object
+        list: true
+        fields:
+          - { name: name, label: اسم الفني, type: string, required: true }
+          - { name: role, label: التخصص, type: string, required: true }
+          - { name: bio, label: نبذة مختصرة, type: text, required: true }
+          - { name: image, label: صورة الفني, type: image, required: true }
+          - { name: freshaUrl, label: رابط الحجز على Fresha, type: string, required: true }

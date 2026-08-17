@@ -70,6 +70,7 @@ function parseFrontmatter(source) {
 
 function inlineMarkdown(text) {
   let out = esc(text);
+  out = out.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" loading="lazy" class="article-inline-image">');
   out = out.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
   out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
   out = out.replace(/\*([^*]+)\*/g, '<em>$1</em>');
@@ -110,6 +111,8 @@ function replaceMarked(html, marker, replacement) {
 const site = json(path.join(contentDir, 'site.json'));
 const services = json(path.join(contentDir, 'services.json')).services;
 const offers = json(path.join(contentDir, 'offers.json')).offers;
+
+const teamData = fs.existsSync(path.join(contentDir, 'team.json')) ? json(path.join(contentDir, 'team.json')).team || [] : [];
 const articles = fs.readdirSync(path.join(contentDir, 'articles'))
   .filter(f => f.endsWith('.md'))
   .map(file => ({ file, ...parseFrontmatter(read(path.join(contentDir, 'articles', file))) }))
@@ -138,6 +141,7 @@ function applySite(html) {
     [/https:\/\/www\.google\.com\/maps\?q=24\.7464426,46\.6196912&z=15&output=embed/g, site.mapEmbed]
   ];
   for (const [pattern, value] of replacements) html = html.replace(pattern, value);
+  html = html.replace(/__FRESHA_URL__/g, site.freshaUrl || '#');
   return html;
 }
 
@@ -221,6 +225,27 @@ const featuredOffers = `<div class="packages-design-grid packages-design-grid--f
 const categories = [...new Set(offers.map(o => o.category))];
 const allOffers = categories.map(category => `<div class="package-category-group">\n        <h3 class="package-category-title"><span class="package-category-line" aria-hidden="true"></span><span class="package-category-label">${esc(category)}</span></h3>\n        <div class="packages-design-grid ${offers.filter(o => o.category === category).length > 3 ? 'packages-design-grid--four' : ''}">\n          ${offers.filter(o => o.category === category).map(o => offerCard(o, offers.indexOf(o))).join('\n          ')}\n        </div>\n      </div>`).join('\n\n      ');
 
+
+const freshaIcon = '<svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zM9 14h2v2H9zm4 0h2v2h-2z"/></svg>';
+function teamCards() {
+  if (!teamData.length) return '';
+  return `<div class="team-grid">
+${teamData.map(m => {
+    const img = assetUrl(m.image);
+    return `        <article class="team-card">
+          <div class="team-card-image"><img src="${img}" alt="${esc(m.name)}" loading="lazy"></div>
+          <div class="team-card-body">
+            <h3>${esc(m.name)}</h3>
+            <span class="team-role">${esc(m.role)}</span>
+            <p>${esc(m.bio)}</p>
+            <a class="btn btn-primary btn-fresha" href="${esc(m.freshaUrl)}" target="_blank" rel="noopener" onclick="dataLayer.push({event:'fresha_click',technician:'${esc(m.name)}'})">
+              ${freshaIcon} احجز موعد
+            </a>
+          </div>
+        </article>`;
+  }).join('\n')}
+      </div>`;
+}
 function articleCards() {
   return `<div class="article-grid">\n${articles.map(a => `        <a class="article-card" href="/articles/${esc(a.data.slug)}/">\n          ${a.data.image ? `<img class="article-card-image" src="${esc(assetUrl(a.data.image))}" alt="صورة مقال: ${esc(a.data.title)}" loading="lazy">` : ''}\n          <div class="article-card-content">\n            <span class="tag">${esc(a.data.category)}</span>\n            <h3>${esc(a.data.title)}</h3>\n            <p>${esc(a.data.excerpt)}</p>\n            <span class="read-more">اقرأ المقال ←</span>\n          </div>\n        </a>`).join('\n')}\n      </div>`;
 }
@@ -238,6 +263,7 @@ for (const entry of fs.readdirSync(templates, { withFileTypes: true })) {
     html = replaceMarked(html, 'SERVICES', serviceCardsHome());
     html = replaceMarked(html, 'FEATURED_OFFERS', featuredOffers);
     html = replaceMarked(html, 'ARTICLES', articleCards());
+    if (/<!-- CMS_TEAM_START -->/.test(html)) html = replaceMarked(html, 'TEAM', teamCards());
   } else if (entry.name === 'services.html') {
     html = replaceMarked(html, 'SERVICES', serviceCardsPage);
   } else if (entry.name === 'offers.html') {
@@ -260,6 +286,14 @@ for (const entry of fs.readdirSync(templates, { withFileTypes: true })) {
   fs.writeFileSync(path.join(dist, entry.name), injectGoogleTagManager(html));
 }
 
+
+// Generate team page
+const teamTemplatePath = path.join(templates, 'team.html');
+if (fs.existsSync(teamTemplatePath)) {
+  let teamHtml = applySite(read(teamTemplatePath));
+  teamHtml = replaceMarked(teamHtml, 'TEAM', teamCards());
+  fs.writeFileSync(path.join(dist, 'team.html'), teamHtml);
+}
 fs.mkdirSync(path.join(dist, 'articles'), { recursive: true });
 let listing = applySite(read(path.join(templates, 'articles', 'index.html')));
 listing = replaceMarked(listing, 'ARTICLES', articleCards());
@@ -292,12 +326,13 @@ for (const article of articles) {
   fs.writeFileSync(path.join(dist, 'articles', `${a.slug}.html`), injectGoogleTagManager(html));
 }
 
-const staticPages = ['services.html','offers.html','contact.html','haircut.html','home-haircut.html','hair-system.html','hair-fiber.html','hair-color.html','rasta.html','curly.html','facial.html','massage.html','spa.html','moroccan-bath.html','pedicure.html'];
+const staticPages = ['team.html','services.html','offers.html','contact.html','haircut.html','home-haircut.html','hair-system.html','hair-fiber.html','hair-color.html','rasta.html','curly.html','facial.html','massage.html','spa.html','moroccan-bath.html','pedicure.html'];
 const base = site.domain.replace(/\/$/, '');
 const cleanPath = p => `/${p.replace(/\.html$/, '')}/`;
 const urls = [
   { loc: `${base}/`, freq: 'weekly', priority: '1.0' },
   ...staticPages.filter(p => fs.existsSync(path.join(dist, p))).map(p => ({ loc: `${base}${cleanPath(p)}`, freq: p === 'offers.html' ? 'weekly' : 'monthly', priority: p === 'offers.html' ? '0.9' : '0.7' })),
+  { loc: `${base}/team/`, freq: 'monthly', priority: '0.7' },
   { loc: `${base}/articles/`, freq: 'weekly', priority: '0.8' },
   ...articles.map(a => ({ loc: `${base}/articles/${a.data.slug}/`, freq: 'monthly', priority: '0.7' }))
 ];
