@@ -1199,3 +1199,8 @@ a:focus-visible, button:focus-visible{
   .team-grid{grid-template-columns:1fr;max-width:380px;margin-inline:auto}
   .team-card-image{aspect-ratio:4/3}
 }
+
+/* ---------- Article body links ---------- */
+.article-body a{color:var(--accent-light);text-decoration:underline;text-underline-offset:3px;font-weight:600;transition:color .2s}
+.article-body a:hover{color:var(--accent)}
+.service-page a,.article-body a{color:var(--accent-light);text-decoration:underline;text-underline-offset:3px}
