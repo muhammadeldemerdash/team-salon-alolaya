@@ -1,0 +1,79 @@
+{
+  "offers": [
+    {
+      "category": "عروض الحلاقة",
+      "title": "باقة الحلاقة الأساسية",
+      "price": "75",
+      "currency": "ريال",
+      "description": "قص شعر + حلاقة لحية بالبخار + غسيل واستشوار + لاصقة أنف",
+      "featured": true
+    },
+    {
+      "category": "عروض الحلاقة",
+      "title": "باقة الحلاقة والماسك",
+      "price": "110",
+      "currency": "ريال",
+      "description": "قص شعر + حلاقة لحية + ماسك + الشمع",
+      "featured": true
+    },
+    {
+      "category": "عروض الحلاقة",
+      "title": "باقة الحلاقة والعناية",
+      "price": "110",
+      "currency": "ريال",
+      "description": "حلاقة شعر + حلاقة لحية + حمام زيت + تنظيف بشرة",
+      "featured": true
+    },
+    {
+      "category": "عروض المساج والسبا",
+      "title": "باقة المساج والحلاقة",
+      "price": "200",
+      "currency": "ريال",
+      "description": "جلسة مساج 60 دقيقة + حلاقة شعر ولحية",
+      "featured": true
+    },
+    {
+      "category": "عروض المساج والسبا",
+      "title": "باقة المساج والباديكير",
+      "price": "230",
+      "currency": "ريال",
+      "description": "جلسة مساج 60 دقيقة + باديكير يد وقدم",
+      "featured": false
+    },
+    {
+      "category": "عروض المساج والسبا",
+      "title": "باقة المساج والحمام المغربي",
+      "price": "250",
+      "currency": "ريال",
+      "description": "جلسة مساج 60 دقيقة + حمام مغربي ملكي",
+      "featured": false
+    },
+    {
+      "category": "عروض الباقات",
+      "title": "الباقة الفضية",
+      "price": "99",
+      "currency": "ريال",
+      "description": "حلاقة شعر + لحية + سنفرة بالبخار + لاصقة انف + غسيل",
+      "image": "/assets/images/uploads/ChatGPT Image 10 أغسطس 2026، 07_51_41 م.png",
+      "featured": true
+    },
+    {
+      "category": "عروض الباقات",
+      "title": "الباقة الذهبية",
+      "price": "149",
+      "currency": "ريال",
+      "description": "حلاقة شعر + لحية + واكس كامل للوجه + سنفرة بالبخار + لاصقة انف + حمام زيت + غسيل ",
+      "image": "/assets/images/uploads/34c07050-6eb5-4682-86f6-d7820fca9fab-1.png",
+      "featured": true
+    },
+    {
+      "category": "عروض الباقات",
+      "title": "باقة تيم الملكية ",
+      "price": "199",
+      "currency": "ريال",
+      "description": "حلاقة شعر + لحية + تنظيف بشرة بروفيشنال + حمام زيت معالج + شمع كامل للوجه + غسيل",
+      "image": "/assets/images/uploads/ChatGPT Image 10 أغسطس 2026، 07_58_37 م.png",
+      "featured": true
+    }
+  ]
+}
