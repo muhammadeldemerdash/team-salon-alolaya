@@ -1204,3 +1204,160 @@ a:focus-visible, button:focus-visible{
 .article-body a{color:var(--accent-light);text-decoration:underline;text-underline-offset:3px;font-weight:600;transition:color .2s}
 .article-body a:hover{color:var(--accent)}
 .service-page a,.article-body a{color:var(--accent-light);text-decoration:underline;text-underline-offset:3px}
+
+
+/* TEAM_LANDSCAPE_PACKAGE_CARD_V4 */
+/* Team reuses the package card visual language, arranged landscape */
+.team-packages-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(520px,1fr));gap:34px;margin-top:2em}
+.team-package-card{--notch-bg:#15533f;--circle-bg:#E7D4B8;display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);align-items:stretch;gap:26px;height:auto;color:var(--text)}
+.team-package-card .package-card-inner{width:auto;height:100%;min-height:230px}
+.team-package-card .package-image-box{border-radius:22px}
+.team-package-card .package-image-box img{object-position:center 18%}
+.team-package-card .package-icon-wrap{width:86px;height:86px}
+.team-package-card .package-card-content{padding:4px 2px 4px 0;justify-content:center}
+.team-package-card .package-title-row{align-items:center}
+.team-package-card .team-role{color:#D6B56A;white-space:normal}
+.team-package-card .team-role small{font-size:.76rem;font-weight:800;line-height:1.5}
+.team-package-card .package-card-content p{min-height:0;margin:10px 0 18px}
+.team-package-card .package-card-actions{margin-top:0;padding-top:4px}
+/* Offer and team tags are real links now */
+.package-tags li{list-style:none}
+.package-tags a.package-tag{display:inline-flex;align-items:center;min-height:36px;text-decoration:none;cursor:pointer;transition:transform .18s cubic-bezier(.25,1,.5,1),filter .18s ease}
+.package-tags a.package-tag:hover{transform:translateY(-2px);filter:brightness(1.06)}
+.package-tags a.package-tag:focus-visible{outline:2px solid #7B69FF;outline-offset:2px}
+.package-tag--category{background:#7B69FF;color:#fff}
+@media(max-width:1100px){
+  .team-packages-grid{grid-template-columns:1fr;max-width:760px;margin-inline:auto}
+}
+@media(max-width:640px){
+  .team-packages-grid{gap:30px;max-width:430px}
+  .team-package-card{grid-template-columns:1fr;gap:0}
+  .team-package-card .package-card-inner{width:100%;height:auto;aspect-ratio:16/11;min-height:210px;max-height:280px}
+  .team-package-card .package-card-content{padding:16px 4px 0}
+  .team-package-card .package-icon-wrap{width:82px;height:82px}
+  .package-tags a.package-tag{min-height:40px}
+}
+
+
+/* TEAM_WIDE_IMAGE_TEXT_BELOW_V5 */
+/* One large offer-style card: landscape visual on top, clear copy underneath */
+.team-packages-grid{
+  display:grid;
+  grid-template-columns:minmax(0,760px);
+  justify-content:center;
+  width:100%;
+  max-width:760px;
+  margin:2.5em auto 0;
+  gap:48px;
+}
+.team-package-card{
+  display:block;
+  width:100%;
+  max-width:760px;
+  height:auto;
+  color:var(--text);
+}
+.team-package-card .package-card-inner{
+  display:block;
+  width:100%;
+  height:auto;
+  min-height:0;
+  aspect-ratio:16/9;
+}
+.team-package-card .package-image-box{
+  border-radius:26px;
+}
+.team-package-card .package-image-box img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 22%;
+}
+.team-package-card .package-icon-wrap{
+  width:108px;
+  height:108px;
+}
+.team-package-card .package-icon-box{
+  inset:11px;
+}
+.team-package-card .package-card-content{
+  display:flex;
+  flex-direction:column;
+  padding:28px 10px 0;
+  text-align:right;
+}
+.team-package-card .package-title-row{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:24px;
+  flex-wrap:wrap;
+}
+.team-package-card .package-title-row h3{
+  margin:0;
+  color:var(--text);
+  font-size:clamp(1.8rem,3vw,2.65rem);
+  line-height:1.25;
+  font-weight:900;
+}
+.team-package-card .team-role{
+  margin:5px 0 0;
+  color:#D6B56A;
+  text-align:left;
+  white-space:normal;
+}
+.team-package-card .team-role small{
+  font-size:clamp(.95rem,1.5vw,1.15rem);
+  font-weight:900;
+  line-height:1.5;
+}
+.team-package-card .package-card-content p{
+  max-width:68ch;
+  min-height:0;
+  margin:16px 0 22px;
+  color:var(--text-muted);
+  font-size:clamp(1rem,1.6vw,1.18rem);
+  font-weight:700;
+  line-height:2;
+  display:block;
+  overflow:visible;
+}
+.team-package-card .package-card-actions{
+  margin:0;
+  padding:0;
+}
+.team-package-card .package-tags{
+  gap:12px;
+}
+.team-package-card .package-tags a.package-tag{
+  min-height:46px;
+  padding:10px 16px;
+  font-size:.9rem;
+  font-weight:900;
+}
+@media(max-width:800px){
+  .team-packages-grid{grid-template-columns:1fr;max-width:680px}
+  .team-package-card .package-card-inner{aspect-ratio:16/10}
+  .team-package-card .package-card-content{padding:24px 6px 0}
+}
+@media(max-width:640px){
+  .team-packages-grid{max-width:100%;margin-top:2em;gap:36px}
+  .team-package-card{max-width:100%}
+  .team-package-card .package-card-inner{
+    width:100%;
+    height:auto;
+    min-height:0;
+    max-height:none;
+    aspect-ratio:4/3;
+  }
+  .team-package-card .package-image-box{border-radius:20px}
+  .team-package-card .package-icon-wrap{width:86px;height:86px}
+  .team-package-card .package-card-content{padding:20px 4px 0}
+  .team-package-card .package-title-row{gap:10px}
+  .team-package-card .package-title-row h3{font-size:1.65rem}
+  .team-package-card .team-role{width:100%;text-align:right;margin-top:0}
+  .team-package-card .team-role small{font-size:1rem}
+  .team-package-card .package-card-content p{font-size:1rem;line-height:1.9;margin:14px 0 18px}
+  .team-package-card .package-tags{display:grid;grid-template-columns:1fr;gap:10px}
+  .team-package-card .package-tags a.package-tag{width:100%;justify-content:center;min-height:48px}
+}

@@ -2,38 +2,10 @@
   "team": [
     {
       "name": "طارق موسى",
-      "role": "مصفف من فريق تيم صالون ",
-      "bio": "أخصائي حلاقة ومصفف شعر محترف يتميز بأسلوب عصري واهتمام دقيق بالتفاصيل لتلبية تطلعات العملاء وإبراز أفضل مظهر لديهم.",
-      "image": "/assets/images/uploads/WhatsApp Image 2026-08-17 at 4.31.14 PM.jpeg",
-      "freshaUrl": "https://www.fresha.com/ar/a/team-salon-shaving-spa-olaya-area-lryd-rhoa8813-8813-laaly-rz9udmq7/booking?employeeId=all&cartId=58321de9-8308-43ed-8eae-5f79b05c9e8b"
-    },
-    {
-      "name": "رودي ",
-      "role": "متخص مساج من فريق تيم صالون ",
-      "bio": "هو أخصائي مساج وعلاجات استرخائية محترف يمتلك مهارة عالية في تقديم جلسات متكاملة تهدف إلى تخفيف الإجهاد وتجديد نشاط الجسم.",
-      "image": "/assets/images/uploads/WhatsApp Image 2026-08-17 at 4.31.14 PM (1).jpeg",
-      "freshaUrl": "https://www.fresha.com/ar/a/team-salon-shaving-spa-olaya-area-lryd-rhoa8813-8813-laaly-rz9udmq7/booking?employeeId=all&cartId=2aa85af5-089f-430a-afec-2b546b58cc3d"
-    },
-    {
-      "name": "يحي ايدافسو",
-      "role": "مصفف من فريق تيم صالون ",
-      "bio": "حلاق ومصفف شعر محترف يتميز بخبرة في تقديم قصات عصرية وتنسيقات شعر متقنة، مع اهتمام دقيق بالتفاصيل وحرص على تقديم إطلالة تناسب أسلوب كل عميل وتطلعاته.\n",
-      "image": "/assets/images/uploads/WhatsApp Image 2026-08-17 at 4.31.48 PM.jpeg",
-      "freshaUrl": "https://www.fresha.com/ar/a/team-salon-shaving-spa-olaya-area-lryd-rhoa8813-8813-laaly-rz9udmq7/booking?employeeId=all&cartId=2aa85af5-089f-430a-afec-2b546b58cc3d"
-    },
-    {
-      "name": "احمد قطب",
-      "role": "مصفف من فريق تيم صالون ",
-      "bio": "حلاق ومصفف شعر محترف يتميز بخبرة واسعة في القصات العصرية وتنسيق الشعر، مع قدرة على اقتراح الستايل الأنسب لشكل الوجه وشخصية كل عميل.",
-      "image": "/assets/images/uploads/WhatsApp Image 2026-08-17 at 4.32.09 PM.jpeg",
-      "freshaUrl": "https://www.fresha.com/ar/a/team-salon-shaving-spa-olaya-area-lryd-rhoa8813-8813-laaly-rz9udmq7/booking?employeeId=all&cartId=2aa85af5-089f-430a-afec-2b546b58cc3d"
-    },
-    {
-      "name": "احمد رزق",
-      "role": "مصفف من فريق تيم صالون ",
-      "bio": "حلاق ومصفف شعر محترف يتميز بقدرته على ابتكار إطلالات تناسب شخصية كل عميل، مع لمسة إبداعية تمنح كل قصة طابعًا خاصًا ومميزًا.\n",
-      "image": "/assets/images/uploads/WhatsApp Image 2026-08-17 at 4.56.25 PM.jpeg",
-      "freshaUrl": "https://www.fresha.com/ar/a/team-salon-shaving-spa-olaya-area-lryd-rhoa8813-8813-laaly-rz9udmq7/booking?employeeId=all&cartId=2aa85af5-089f-430a-afec-2b546b58cc3d"
+      "role": "حلاق ومصفف شعر",
+      "bio": "من فريق تيم صالون، أخصائي حلاقة ومصفف شعر محترف يتميز بأسلوب عصري واهتمام دقيق بالتفاصيل لتلبية تطلعات العملاء.",
+      "image": "/assets/images/team/tariq-mousa.jpeg",
+      "freshaUrl": "https://www.fresha.com/ar/a/team-salon-shaving-spa-olaya-area-lryd-rhoa8813-8813-laaly-rz9udmq7"
     }
   ]
 }

@@ -214,9 +214,9 @@ const offerCard = (o, index = 0) => {
             </div>
             <p>${esc(o.description)}</p>
             <div class="package-card-actions">
-              <ul class="package-tags" aria-label="تفاصيل الباقة">
-                <li class="package-tag package-tag--category">${esc(o.category)}</li>
-                <li class="package-tag package-tag--booking">حجز عبر واتساب</li>
+              <ul class="package-tags" aria-label="خيارات الحجز">
+                <li><a class="package-tag package-tag--category" href="${esc(site.freshaUrl || '#')}" target="_blank" rel="noopener" onclick="dataLayer.push({event:'fresha_click',location:'offer_tag'})">${esc(o.category)}</a></li>
+                <li><a class="package-tag package-tag--booking" href="https://wa.me/${site.whatsapp}?text=${message}" target="_blank" rel="noopener">حجز عبر واتساب</a></li>
               </ul>
             </div>
           </div>
@@ -230,18 +230,32 @@ const allOffers = categories.map(category => `<div class="package-category-group
 const freshaIcon = '<svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zM9 14h2v2H9zm4 0h2v2h-2z"/></svg>';
 function teamCards() {
   if (!teamData.length) return '';
-  return `<div class="team-grid">
+  return `<div class="team-packages-grid">
 ${teamData.map(m => {
     const img = assetUrl(m.image);
-    return `        <article class="team-card">
-          <div class="team-card-image"><img src="${img}" alt="${esc(m.name)}" loading="lazy"></div>
-          <div class="team-card-body">
-            <h3>${esc(m.name)}</h3>
-            <span class="team-role">${esc(m.role)}</span>
+    const bookingUrl = esc(m.freshaUrl || site.freshaUrl || '#');
+    const waText = encodeURIComponent(`مرحباً، أريد الحجز مع ${m.name}`);
+    return `        <article class="package-card team-package-card">
+          <div class="package-card-inner">
+            <div class="package-image-box">
+              <img src="${img}" alt="${esc(m.name)}" loading="lazy">
+            </div>
+            <div class="package-icon-wrap">
+              <a class="package-icon-box" href="https://wa.me/${site.whatsapp}?text=${waText}" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب مع ${esc(m.name)}">${packageArrow}</a>
+            </div>
+          </div>
+          <div class="package-card-content">
+            <div class="package-title-row">
+              <h3>${esc(m.name)}</h3>
+              <span class="package-price team-role"><small>${esc(m.role)}</small></span>
+            </div>
             <p>${esc(m.bio)}</p>
-            <a class="btn btn-primary btn-fresha" href="${esc(m.freshaUrl)}" target="_blank" rel="noopener" onclick="dataLayer.push({event:'fresha_click',technician:'${esc(m.name)}'})">
-              ${freshaIcon} احجز موعد
-            </a>
+            <div class="package-card-actions">
+              <ul class="package-tags" aria-label="خيارات الحجز">
+                <li><a class="package-tag package-tag--category" href="${bookingUrl}" target="_blank" rel="noopener" onclick="dataLayer.push({event:'fresha_click',technician:'${esc(m.name)}',location:'team_card'})">احجز موعد على فريشا</a></li>
+                <li><a class="package-tag package-tag--booking" href="https://wa.me/${site.whatsapp}?text=${waText}" target="_blank" rel="noopener">حجز عبر واتساب</a></li>
+              </ul>
+            </div>
           </div>
         </article>`;
   }).join('\n')}
