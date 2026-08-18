@@ -241,7 +241,7 @@ ${teamData.map(m => {
               <img src="${img}" alt="${esc(m.name)}" loading="lazy">
             </div>
             <div class="package-icon-wrap">
-              <a class="package-icon-box" href="https://wa.me/${site.whatsapp}?text=${waText}" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب مع ${esc(m.name)}">${packageArrow}</a>
+              <a class="package-icon-box" href="${bookingUrl}" target="_blank" rel="noopener" onclick="dataLayer.push({event:'fresha_click',technician:'${esc(m.name)}',location:'team_card_arrow'})" aria-label="احجز مع ${esc(m.name)} على Fresha">${packageArrow}</a>
             </div>
           </div>
           <div class="package-card-content">
