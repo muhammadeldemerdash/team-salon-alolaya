@@ -6,7 +6,7 @@ excerpt: تعرف على طريقة عمل الاستشوار للشعر الخ�
 category: الحلاقة
 date: 2026-08-19
 author: فريق Team Salon
-image: /assets/images/uploads/banner.avif
+image: /assets/images/uploads/bannar-1-b2.avif
 seoTitle: طريقة عمل الاستشوار للشعر الخشن للرجال
 seoDescription: تعرف على طريقة عمل الاستشوار للشعر الخشن للرجال بخطوات تساعد على
   تنعيم الشعر وتصفيفه بشكل مرتب مع نصائح للحفاظ عليه.
@@ -83,7 +83,7 @@ published: true
 
 بعد الانتهاء، يمكن استخدام كمية صغيرة من السيروم على الأطراف لتقليل الهيشان وإضافة مظهر أكثر نعومة ولمعانًا.
 
-![طريقة عمل الاستشوار للشعر الخشن للرجال](/assets/images/uploads/photo-salon.avif)
+![](/assets/images/uploads/photo-1-b2.avif)
 
 ## **أخطاء يجب تجنبها عند استخدام الاستشوار**
 
