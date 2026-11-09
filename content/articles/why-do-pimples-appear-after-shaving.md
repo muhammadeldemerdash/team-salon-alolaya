@@ -4,7 +4,7 @@ slug: why-do-pimples-appear-after-shaving
 excerpt: لماذا تظهر حبوب بعد الحلاقه؟ تعرف على الأسباب الشائعة لتهيج البشرة
   والشعر النامي للداخل وخطوات تساعد على تقليل ظهور الحبوب بعد الحلاقة.
 category: العناية بالبشرة للرجال
-date: 2026-11-09
+date: 2026-11-07
 author: فريق Team Salon
 image: /assets/images/uploads/banner-25-b2.avif
 seoTitle: لماذا تظهر حبوب بعد الحلاقه؟ الأسباب والوقاية
